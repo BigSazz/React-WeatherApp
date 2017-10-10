@@ -8,7 +8,7 @@ const React = require('react');
 
 let WeatherMsg = ({temp, location, country}) => {
     return (
-        <h5>The temperature is {temp} in {location},{country}</h5>
+        <h5>The temperature is {temp} in {location}, {country}</h5>
     );
 }
 
