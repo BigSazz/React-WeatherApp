@@ -13,7 +13,7 @@ let Examples = (props) => {
     return (
         <div>
             <h1 className="text-center">Examples</h1>
-            <p>Welcome to the Examples page! Here are a few locations to tyr out:</p>
+            <p>Welcome to the Examples page! Here are a few locations to try out:</p>
             <ul>
                 <li>
                     <Link to='/?location=Abuja'>Abuja, NG</Link>

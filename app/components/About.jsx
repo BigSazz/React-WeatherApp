@@ -10,8 +10,9 @@ const React = require('react');
 let About = (props) => {
     return (
         <div>
-            <h3>About</h3>
-            <p>Welcome to the About page</p>
+            <h3 className="text-center">About</h3>
+            <p className="text-center">WeatherMania is an easy to use Web Application for getting weather temperature of any location around the world!</p>
+            <p className="text-center">Powered by OpenWeatherApp</p>
         </div>
     );
 };
