@@ -10,7 +10,7 @@ const React = require('react');
 let About = (props) => {
     return (
         <div>
-            <h1 className="text-center">About</h1>
+            <h1 className="text-center page-title">About</h1>
             <p className="text-center">WeatherMania is an easy to use Web Application for getting weather temperature of any location around the world!</p>
             <ul>
                 <li>
