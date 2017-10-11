@@ -1,6 +1,7 @@
 const React = require('react');
 const WeatherForm = require('WeatherForm');
 const WeatherMsg = require('WeatherMsg');
+const ErrorModal = require('ErrorModal');
 const openWeatherApp = require('openWeatherApp');
 const darkSkyApi = require('darkSkyApi');
 
@@ -13,7 +14,10 @@ let Weather = React.createClass({
     handleSearch: function (location) {
         let that = this;
 
-        this.setState({isLoading: true});
+        this.setState({
+            isLoading: true,
+            errorMessage: undefined
+        });
         // Using Open Weather App Api 
         openWeatherApp.getTemp(location).then(function (temp) {
             that.setState({
@@ -22,9 +26,11 @@ let Weather = React.createClass({
                 country: temp.country,
                 isLoading: false
             });
-        }, function (errorMessage) {
-            that.setState({isLoading: false});
-            alert(errorMessage);
+        }, function (e) {
+            that.setState({
+                isLoading: false,
+                errorMessage: e.message
+            });
         });
         // Trying to use Dark Sky Api
         // darkSkyApi.viewWeather(location).then(function (temp) {
@@ -39,7 +45,7 @@ let Weather = React.createClass({
         // });
     },
     render: function () {
-        let {isLoading, temp, location, country} = this.state;
+        let {isLoading, temp, location, country, errorMessage} = this.state;
 
         function renderMessage () {
             if (isLoading) {
@@ -48,12 +54,19 @@ let Weather = React.createClass({
                 return <WeatherMsg location={location} temp={temp} country={country}/>;
             }
         };
-        
+        function renderError () {
+            if (typeof errorMessage === 'string') {
+                return (
+                    <ErrorModal message={errorMessage}/>
+                )
+            }
+        };
         return(
             <div>
                 <h1 className="text-center">WeatherMania</h1>
                 <WeatherForm onSearch={this.handleSearch}/>
                 {renderMessage()}
+                {renderError()}
             </div>
         );
     }
