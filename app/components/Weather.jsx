@@ -16,7 +16,9 @@ let Weather = React.createClass({
 
         this.setState({
             isLoading: true,
-            errorMessage: undefined
+            errorMessage: undefined,
+            location: undefined,
+            temp: undefined
         });
         // Using Open Weather App Api 
         openWeatherApp.getTemp(location).then(function (temp) {
@@ -44,27 +46,43 @@ let Weather = React.createClass({
         //     alert(err);
         // });
     },
-    render: function () {
-        let {isLoading, temp, location, country, errorMessage} = this.state;
+    componentDidMount: function () {
+        let location = this.props.location.query.location;
 
-        function renderMessage () {
+        if (location && location.length > 0) {
+            this.handleSearch(location);
+            window.location.hash = '#/';
+        }
+    },
+    componentWillReceiveProps: function (newProps) {
+        let location = newProps .location.query.location;
+
+        if (location && location.length > 0) {
+            this.handleSearch(location);
+            window.location.hash = '#/';
+        }
+    },
+    render: function () {
+        let { isLoading, temp, location, country, errorMessage } = this.state;
+
+        function renderMessage() {
             if (isLoading) {
                 return <h3 className="text-center">Fetching Weather...</h3>
             } else if (temp && location && country) {
-                return <WeatherMsg location={location} temp={temp} country={country}/>;
+                return <WeatherMsg location={location} temp={temp} country={country} />;
             }
         };
-        function renderError () {
+        function renderError() {
             if (typeof errorMessage === 'string') {
                 return (
-                    <ErrorModal message={errorMessage}/>
+                    <ErrorModal message={errorMessage} />
                 )
             }
         };
-        return(
+        return (
             <div>
                 <h1 className="text-center page-title">WeatherMania</h1>
-                <WeatherForm onSearch={this.handleSearch}/>
+                <WeatherForm onSearch={this.handleSearch} />
                 {renderMessage()}
                 {renderError()}
             </div>

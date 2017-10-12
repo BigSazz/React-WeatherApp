@@ -19,7 +19,7 @@ let Examples = (props) => {
                     <Link to='/?location=Abuja'>Abuja, NG</Link>
                 </li>
                 <li>
-                    <Link to='/?location=Cape town'>Cape Town, SA</Link>
+                    <Link to='/?location=Cape%20town'>Cape Town, SA</Link>
                 </li>
             </ul>
         </div>
