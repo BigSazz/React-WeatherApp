@@ -32,7 +32,7 @@ module.exports = {
             openWeatherApp: 'app/api/openWeatherApp.jsx',
             darkSkyApi: 'app/api/darkSkyApi.jsx',
             ErrorModal: 'app/components/ErrorModal.jsx',
-            applicationStyles: 'app/styles/app.css'
+            applicationStyles: 'app/styles/app.scss'
         },
         extensions: ['', '.js', '.jsx']
     },
